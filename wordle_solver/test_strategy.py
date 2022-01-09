@@ -1,8 +1,15 @@
+from argparse import ArgumentParser
+
 from wordle_solver import WORDS, result_of_guess
-from wordle_solver.strategy_1 import Strategy
+from wordle_solver.strategy_1 import Strategy as Strategy1
 
 
-def test_strategy(strategy_cls, answer):
+STRATEGIES = {
+    1: Strategy1
+}
+
+
+def test_strategy_for_given_answer(strategy_cls, answer):
     """
     Return the number of guesses it takes the strategy to get the correct answer, for a given answer.
     """
@@ -15,16 +22,16 @@ def test_strategy(strategy_cls, answer):
     return guess_count
 
 
-def expected_guess_count(strategy_cls):
+def test_strategy(strategy_cls):
     """
-    Return the expected (average) number of guesses it takes the strategy to get the correct answer, across
-    all possible answers.
+    Print the expected number of guesses it takes the strategy to get the correct answer, across all possible answers.
+    Also print the worst possible word(s) for the given strategy.
     """
     total = 0
     worst_words, worst_guess_count = [], 0
 
     for word in WORDS:
-        guess_count = test_strategy(strategy_cls, word)
+        guess_count = test_strategy_for_given_answer(strategy_cls, word)
         total += guess_count
         print(f'{word} - {guess_count}')
 
@@ -34,9 +41,23 @@ def expected_guess_count(strategy_cls):
         elif guess_count == worst_guess_count:
             worst_words.append(word)
 
-    print(f'Expected number of guesses: {total / len(WORDS)}')
-    print(f'These are the worst words which took {worst_guess_count} guesses: {worst_words}')
+    print(
+        f"This strategy takes {round(total / len(WORDS), 3)} guesses on average.\n"
+        f"The worst word(s) for this strategy are '{worst_words}', which take {worst_guess_count} guesses to get."
+    )
+
+
+def main():
+    parser = ArgumentParser()
+    parser.add_argument('strategy', type=int)
+    strategy_number = parser.parse_args().strategy
+    try:
+        strategy_cls = STRATEGIES[strategy_number]
+    except KeyError:
+        raise Exception(f'Invalid strategy: {strategy_number}')
+    else:
+        test_strategy(strategy_cls)
 
 
 if __name__ == '__main__':
-    expected_guess_count(Strategy)
+    main()

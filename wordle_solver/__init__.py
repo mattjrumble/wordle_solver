@@ -1,4 +1,4 @@
-with open('../words.txt') as fd:
+with open('words.txt') as fd:
     WORDS = [line.strip() for line in fd.readlines()]
 
 
