@@ -12,8 +12,16 @@ run ```python wordle_solver/test_strategy.py <STRATEGY_NUMBER>```.
 ### Strategy 1
 
 This strategy keeps track of every word that hasn't been ruled out yet, in alphabetical order. It picks the first word
-from this list, then updates the list based on the result of the guess, ruling out any words that it can't be. This
-repeats the word is found.
+from this list, then updates the list based on the result of the guess. This repeats the word is found.
 
 This strategy takes **5.530** guesses on average. The worst word for this strategy is 'ZILLS', which takes 18 guesses to
 get.
+
+### Strategy 1
+
+This strategy keeps track of every word that hasn't been ruled out yet. It picks the "best" word from this list based
+on a scoring of how common each letter in the word is - words with the more common letters are favoured. It
+then updates the list based on the result of the guess. This repeats the word is found.
+
+This strategy takes **4.951** guesses on average. The worst words for this strategy
+are '['SALES', 'SANGS', 'SILLS']', which take 15 guesses to get.

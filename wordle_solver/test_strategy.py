@@ -1,11 +1,14 @@
 from argparse import ArgumentParser
+from time import time
 
 from wordle_solver import WORDS, result_of_guess
 from wordle_solver.strategy_1 import Strategy as Strategy1
+from wordle_solver.strategy_2 import Strategy as Strategy2
 
 
 STRATEGIES = {
-    1: Strategy1
+    1: Strategy1,
+    2: Strategy2
 }
 
 
@@ -27,6 +30,7 @@ def test_strategy(strategy_cls):
     Print the expected number of guesses it takes the strategy to get the correct answer, across all possible answers.
     Also print the worst possible word(s) for the given strategy.
     """
+    start = time()
     total = 0
     worst_words, worst_guess_count = [], 0
 
@@ -45,6 +49,8 @@ def test_strategy(strategy_cls):
         f"This strategy takes {round(total / len(WORDS), 3)} guesses on average.\n"
         f"The worst word(s) for this strategy are '{worst_words}', which take {worst_guess_count} guesses to get."
     )
+    end = time()
+    print(f'Time taken: {end-start}')
 
 
 def main():
