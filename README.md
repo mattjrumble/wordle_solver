@@ -27,6 +27,12 @@ which take 15 guesses to get.
 
 ### Strategy 3 (WIP)
 
-This strategy has pre-calculated the "best" first guess, where the best first guess is the one that results in the
+This strategy involves a few pre-calculations.
+
+First we pre-calculate the "best" first guess, where the best first guess is defined as the one that results in the
 lowest number of remaining possible words, when averaged across all possible answers. The code for this pre-calculation
 is in `wordle_solver/strategy_3/compute_best_first_guess.py` and the best first guess is `LARES`.
+
+Then we pre-calculate the "best" second guess, for every possible result that might come from the first guess (`LARES`).
+The code for this pre-calculation is in `wordle_solver/strategy_3/compute_best_second_guess.py`, and this outputs
+a mapping of `{result from first guess -> best second guess}` into a text file.
