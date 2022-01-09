@@ -24,3 +24,9 @@ word. The "best" word is based on a heuristic scoring of how common each unique 
 
 This strategy takes **4.951** guesses on average. The worst words for this strategy are `[SALES, SANGS, SILLS]`,
 which take 15 guesses to get.
+
+### Strategy 3 (WIP)
+
+This strategy has pre-calculated the "best" first guess, where the best first guess is the one that results in the
+lowest number of remaining possible words, when averaged across all possible answers. The code for this pre-calculation
+is in `wordle_solver/strategy_3/compute_best_first_guess.py` and the best first guess is `LARES`.

@@ -4,11 +4,13 @@ from time import time
 from wordle_solver import WORDS, result_of_guess
 from wordle_solver.strategy_1 import Strategy as Strategy1
 from wordle_solver.strategy_2 import Strategy as Strategy2
+from wordle_solver.strategy_3 import Strategy as Strategy3
 
 
 STRATEGIES = {
     1: Strategy1,
-    2: Strategy2
+    2: Strategy2,
+    3: Strategy3
 }
 
 
