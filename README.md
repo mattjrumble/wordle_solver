@@ -37,8 +37,9 @@ Then we pre-calculate the "best" second guess, for every possible result that mi
 The code for this pre-calculation is in `wordle_solver/strategy_3/compute_best_second_guess.py`, and this outputs
 a mapping of `{result from first guess -> best second guess}` into a text file.
 
-The strategy then uses these pre-calculations for the first two guesses. After the first two guesses, it acts like
-Strategy 2.
+The strategy then uses these pre-calculations for the first two guesses. After the first two guesses, it picks the word
+from the list of remaining possible answers that gives the lower number of remaining possible words, when averaged
+across all remaining possible answers.
 
-This strategy takes **4.535** guesses on average. The worst word for this strategy is `SILLS`, which takes 16 guesses
+This strategy takes **4.378** guesses on average. The worst word for this strategy is `ZILLS`, which takes 15 guesses
 to get.

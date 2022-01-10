@@ -1,3 +1,5 @@
+from sys import maxsize
+
 from wordle_solver import WORDS, result_of_guess
 from wordle_solver.strategy_3 import words_remaining_for_given_result
 
@@ -32,7 +34,7 @@ def main():
     """
     Determine which first guess results in the lowest average number of remaining possible words.
     """
-    best_first_guess, best_total = None, 99999999999999999
+    best_first_guess, best_total = None, maxsize
     for word in WORDS:
         try:
             total = check_for_better_total(first_guess=word, current_best_total=best_total)

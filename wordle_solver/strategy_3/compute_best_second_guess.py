@@ -1,3 +1,5 @@
+from sys import maxsize
+
 from wordle_solver import WORDS, result_of_guess
 from wordle_solver.strategy_3 import BEST_SECOND_GUESSES_FILENAME, BEST_FIRST_GUESS
 from wordle_solver.strategy_3.compute_best_first_guess import words_remaining_for_given_result
@@ -39,7 +41,7 @@ def main():
     for result in possible_results:
         print(f'Calculating for result: {result}')
         words_after_first_guess = words_remaining_for_given_result(guess=BEST_FIRST_GUESS, result=result)
-        best_second_guess, best_total = None, 99999999999999999
+        best_second_guess, best_total = None, maxsize
         for i, word in enumerate(WORDS):
             if i % 1000 == 0:
                 print(f'{i} / {len(WORDS)}')

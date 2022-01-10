@@ -1,4 +1,6 @@
-from wordle_solver import WORDS, LETTER_FREQUENCIES, filter_words
+from sys import maxsize
+
+from wordle_solver import WORDS, filter_words, result_of_guess
 from wordle_solver.strategy_3 import BEST_FIRST_GUESS, BEST_SECOND_GUESSES_FILENAME
 
 
@@ -12,14 +14,13 @@ def load_best_second_guess_mapping():
 
 
 BEST_SECOND_GUESS_MAPPING = load_best_second_guess_mapping()
-WORD_FREQUENCY_SCORES = {
-    word: sum(LETTER_FREQUENCIES[letter] for letter in set(word)) for word in WORDS
-}
 
 
 class Strategy:
     """
-    Use a pre-calculated mapping for the first two guesses. After the first two guesses, act like Strategy 2.
+    Use a pre-calculated mapping for the first two guesses. After the first two guesses, pick the word from the list
+    of remaining possible answers that gives the lower number of remaining possible words, when averaged across all
+    possible answers.
     """
     def __init__(self):
         self.guess_count = 0
@@ -35,21 +36,21 @@ class Strategy:
         elif self.guess_count == 2:
             guess = BEST_SECOND_GUESS_MAPPING[self.last_result]
         else:
-            # After the first two guesses, act like Strategy 2
-            guess = self.best_word(self.possible_words)
+            best_guess = None
+            best_total = maxsize
+            for possible_guess in self.possible_words:
+                total = sum(len(filter_words(
+                    words=self.possible_words,
+                    guess=possible_guess,
+                    result=result_of_guess(guess=possible_guess, answer=answer)
+                )) for answer in self.possible_words)
+                if total < best_total:
+                    best_guess = possible_guess
+                    best_total = total
+            guess = best_guess
 
         self.last_guess = guess
         return guess
-
-    @staticmethod
-    def best_word(words):
-        best_word, best_score = None, -1
-        for word in words:
-            score = WORD_FREQUENCY_SCORES[word]
-            if score > best_score:
-                best_word = word
-                best_score = score
-        return best_word
 
     def receive_result_of_last_guess(self, result):
         self.last_result = result
