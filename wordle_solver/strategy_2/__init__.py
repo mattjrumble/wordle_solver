@@ -2,7 +2,7 @@ from wordle_solver import WORDS, LETTER_FREQUENCIES, filter_words
 
 
 WORD_FREQUENCY_SCORES = {
-    word: sum(LETTER_FREQUENCIES[l] for l in set(word)) for word in WORDS
+    word: sum(LETTER_FREQUENCIES[letter] for letter in set(word)) for word in WORDS
 }
 
 
