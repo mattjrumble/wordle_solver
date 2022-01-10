@@ -37,7 +37,8 @@ first guess is `LARES`.
   
 Then we pre-calculate the "best" second guess, for every possible result that might come from the first guess (`LARES`).  
 The code for this pre-calculation is in `wordle_solver/strategy_3/compute_best_second_guess.py`, and this outputs  
-a mapping of `{best first guess -> result from first guess -> best second guess}` into `best_second_guesses.txt`.  
+a mapping of `{best first guess -> result from first guess -> best second guess}` into
+`wordle_solver/strategy_3/best_second_guesses.txt`.  
   
 The strategy uses these pre-calculations for the first two guesses. After the first two guesses, it always picks  
 the word from the list of remaining possible answers that gives the lower number of remaining possible words, when  
