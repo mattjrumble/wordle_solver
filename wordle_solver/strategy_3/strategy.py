@@ -8,7 +8,7 @@ def load_best_second_guess_mapping():
     mapping = {}
     with open(BEST_SECOND_GUESSES_FILENAME) as fd:
         for line in fd.readlines():
-            result_string, word = line.strip().split(' ')
+            _, result_string, word = line.strip().split(' ')
             mapping[tuple(int(x) for x in result_string)] = word
     return mapping
 

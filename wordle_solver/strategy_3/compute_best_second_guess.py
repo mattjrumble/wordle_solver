@@ -76,7 +76,7 @@ def main():
             f'(down from {len(words_after_first_guess)}).'
         )
         with open(BEST_SECOND_GUESSES_FILENAME, 'a') as fd:
-            fd.write(f'{"".join(str(x) for x in result)} {best_second_guess}\n')
+            fd.write(f'{BEST_FIRST_GUESS} {"".join(str(x) for x in result)} {best_second_guess}\n')
 
 
 if __name__ == '__main__':
