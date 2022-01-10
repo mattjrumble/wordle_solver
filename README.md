@@ -11,21 +11,24 @@ run `python wordle_solver/test_strategy.py <STRATEGY_NUMBER>`.
 
 ### Strategy 1
 
+#### Average guesses: 5.530
+#### Worst word for this strategy: ZILLS (18 guesses)
+
 This strategy keeps track of every word that hasn't been ruled out yet, in alphabetical order. It picks the first word
 from this list, then updates the list based on the result of the guess. This repeats until the word is found.
 
-This strategy takes **5.530** guesses on average. The worst word for this strategy is `ZILLS`, which takes 18 guesses to
-get.
-
 ### Strategy 2
+
+#### Average guesses: 4.951
+#### Worst words for this strategy: SALES, SANGS, SILLS (15 guesses)
 
 This strategy improves on Strategy 1 by picking the "best" word from the list of possible words, rather than the first
 word. The "best" word is based on a heuristic scoring of how common each unique letter in the word is.
 
-This strategy takes **4.951** guesses on average. The worst words for this strategy are `[SALES, SANGS, SILLS]`,
-which take 15 guesses to get.
-
 ### Strategy 3 (WIP)
+
+#### Average guesses: 4.378
+#### Worst word for this strategy: ZILLS (15 guesses)
 
 This strategy involves a few pre-calculations.
 
@@ -37,9 +40,6 @@ Then we pre-calculate the "best" second guess, for every possible result that mi
 The code for this pre-calculation is in `wordle_solver/strategy_3/compute_best_second_guess.py`, and this outputs
 a mapping of `{result from first guess -> best second guess}` into a text file.
 
-The strategy then uses these pre-calculations for the first two guesses. After the first two guesses, it picks the word
-from the list of remaining possible answers that gives the lower number of remaining possible words, when averaged
-across all remaining possible answers.
-
-This strategy takes **4.378** guesses on average. The worst word for this strategy is `ZILLS`, which takes 15 guesses
-to get.
+The strategy then uses these pre-calculations for the first two guesses. After the first two guesses, it always picks
+the word from the list of remaining possible answers that gives the lower number of remaining possible words, when
+averaged across all remaining possible answers.
