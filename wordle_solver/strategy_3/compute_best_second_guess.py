@@ -41,7 +41,7 @@ def main():
     number of remaining possible words. Store this mapping of {result -> best second guess} in a file.
     """
     possible_results = sorted(set(result_of_guess(guess=FIRST_GUESS, answer=word) for word in WORDS))
-    for result in possible_results[9:]:
+    for result in possible_results[9:]:  # TODO: Remove this `[9:]`
         print(f'Calculating for result: {result}')
         words_after_first_guess = words_remaining_for_given_result(guess=FIRST_GUESS, result=result)
         best_second_guess, best_total = None, 99999999999999999
@@ -70,7 +70,7 @@ def main():
             f'(down from {len(words_after_first_guess)}).'
         )
         with open(OUTPUT_FILENAME, 'a') as fd:
-            fd.write(f'{result} - {best_second_guess}\n')
+            fd.write(f'{"".join(str(x) for x in result)} {best_second_guess}\n')
 
 
 if __name__ == '__main__':
