@@ -1,8 +1,14 @@
 from collections import defaultdict
 from itertools import combinations
+from os.path import join
 from string import ascii_uppercase
 
 from wordle_solver import result_of_guess, WORDS
+
+
+#  We know that 'LARES' is the best first guess, thanks to `compute_best_first_guess.py`.
+BEST_FIRST_GUESS = 'LARES'
+BEST_SECOND_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'best_second_guesses.txt')
 
 
 def build_letters_in_words_mapping():

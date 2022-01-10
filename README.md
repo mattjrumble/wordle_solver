@@ -36,3 +36,9 @@ is in `wordle_solver/strategy_3/compute_best_first_guess.py` and the best first 
 Then we pre-calculate the "best" second guess, for every possible result that might come from the first guess (`LARES`).
 The code for this pre-calculation is in `wordle_solver/strategy_3/compute_best_second_guess.py`, and this outputs
 a mapping of `{result from first guess -> best second guess}` into a text file.
+
+The strategy then uses these pre-calculations for the first two guesses. After the first two guesses, it acts like
+Strategy 2.
+
+This strategy takes **4.535** guesses on average. The worst word for this strategy is `SILLS`, which takes 16 guesses
+to get.
