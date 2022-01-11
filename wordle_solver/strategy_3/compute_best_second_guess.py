@@ -14,7 +14,7 @@ def main():
     number of remaining possible words. Store this mapping in a file.
     """
     possible_results = sorted(set(result_of_guess(guess=BEST_FIRST_GUESS, answer=word) for word in WORDS))
-    possible_results.pop((2, 2, 2, 2, 2))  # If the first guess was correct, there is no second guess.
+    possible_results.remove((2, 2, 2, 2, 2))  # If the first guess was correct, there is no second guess.
     for result in possible_results:
         print(f'Calculating for result: {result}')
         words_after_first_guess = words_remaining_for_given_result(words=WORDS, guess=BEST_FIRST_GUESS, result=result)
