@@ -1,7 +1,11 @@
+from os.path import join
 from sys import maxsize
 
 from wordle_solver import WORDS, filter_words, result_of_guess
-from wordle_solver.strategy_3 import BEST_FIRST_GUESS, BEST_SECOND_GUESSES_FILENAME
+
+
+BEST_FIRST_GUESS = 'LARES'
+BEST_SECOND_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'best_second_guesses.txt')
 
 
 def load_best_second_guess_mapping():

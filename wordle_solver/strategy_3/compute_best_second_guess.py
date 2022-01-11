@@ -1,8 +1,12 @@
+from os.path import join
 from sys import maxsize
 
 from wordle_solver import WORDS, result_of_guess
-from wordle_solver.strategy_3 import BEST_SECOND_GUESSES_FILENAME, BEST_FIRST_GUESS
-from wordle_solver.strategy_3.compute_best_first_guess import words_remaining_for_given_result
+from wordle_solver.strategy_3 import words_remaining_for_given_result
+
+
+BEST_FIRST_GUESS = 'LARES'
+BEST_SECOND_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'best_second_guesses.txt')
 
 
 class WorseTotal(Exception):
