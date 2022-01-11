@@ -1,6 +1,7 @@
 from collections import defaultdict
 from itertools import combinations
 from string import ascii_uppercase
+from sys import maxsize
 
 from wordle_solver import result_of_guess, WORDS
 
@@ -36,7 +37,11 @@ LETTERS_IN_WORDS_MAPPING = build_letters_in_words_mapping()
 LETTERS_NOT_IN_WORDS_MAPPING = build_letters_not_in_words_mapping()
 
 
-def words_remaining_for_given_result(guess, result):
+class WorseTotal(Exception):
+    pass
+
+
+def words_remaining_for_given_result(words, guess, result):
     """
     Return the words that would remain after the given guess and corresponding result.
     """
@@ -66,4 +71,61 @@ def words_remaining_for_given_result(guess, result):
     else:
         possible_words = deduced_from_correct_letters.intersection(deduced_from_incorrect_letters)
 
+    possible_words = possible_words.intersection(words)
+
     return set(word for word in possible_words if result_of_guess(guess, word) == result)
+
+
+def check_for_better_total(words, guess, current_best_total=None):
+    """
+    Calculate the total number of remaining words after the given guess, summed across all possible remaining words.
+    Raise a `WorseAverage` exception if this number is larger than the current best total.
+    Return the new total if it's lower.
+    """
+    # Maintain a mapping of results to the remaining words. There's no point recalculating all the words
+    # that are ruled out by a result we've already calculated it for.
+    result_to_remaining_words_cache = {}
+    total = 0
+    for answer in words:
+        result = result_of_guess(guess=guess, answer=answer)
+        remaining_words = result_to_remaining_words_cache.get(result)
+        if remaining_words is None:
+            remaining_words = words_remaining_for_given_result(words=words, guess=guess, result=result)
+            result_to_remaining_words_cache[result] = remaining_words
+        total += len(remaining_words)
+        if current_best_total and total > current_best_total:
+            raise WorseTotal()
+    return total
+
+
+def find_best_next_guess(words):
+    """
+    Given a list of remaining possible answers, find the best guess to narrow this list down, based on the number
+    of remaining words after the guess, summed across all possible answers.
+    """
+    best_guess, best_total = None, maxsize
+    for i, guess in enumerate(WORDS):
+        if i % 1000 == 0 and i > 0:
+            print(f'{i} / {len(WORDS)}')
+        try:
+            total = check_for_better_total(words=words, guess=guess, current_best_total=best_total)
+        except WorseTotal:
+            pass
+        else:
+            best_guess = guess
+            best_total = total
+            # If the total is equal to the length of possible answers, then this guess guarantees the word can be found
+            # next round (if it hasn't been found already). The only way we can improve on this is by finding a guess
+            # that meets this condition whilst also being in the list of remaining possible answers - so that this
+            # guess has a chance of being correct.
+            if best_total == len(words):
+                for remaining_word in words:
+                    if check_for_better_total(words=words, guess=remaining_word) == len(words):
+                        best_guess = remaining_word
+                        break
+                break
+    print(
+        f'Best next guess is {best_guess} with {best_total / len(words)} average remaining words '
+        f'(down from {len(words)}).'
+    )
+    return best_guess

@@ -22,7 +22,7 @@ def check_for_better_total(first_guess, current_best_total):
         result = result_of_guess(guess=first_guess, answer=answer)
         count = result_to_count_cache.get(result)
         if count is None:
-            count = len(words_remaining_for_given_result(guess=first_guess, result=result))
+            count = len(words_remaining_for_given_result(words=WORDS, guess=first_guess, result=result))
             result_to_count_cache[result] = count
         total += count
         if total > current_best_total:
