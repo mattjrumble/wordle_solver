@@ -65,7 +65,7 @@ def main():
             else:
                 resumed_second_result = None
 
-            print(f'Calculating for results: {first_result} and {second_result}')
+            print(f'Calculating next best guess for: {first_guess} {first_result} {second_guess} {second_result}')
             words_after_second_guess = set(filter_words(
                 words=words_after_first_guess, guess=second_guess, result=second_result
             ))
