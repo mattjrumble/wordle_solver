@@ -103,10 +103,13 @@ def find_best_next_guess(words):
     Given a list of remaining possible answers, find the best guess to narrow this list down, based on the number
     of remaining words after the guess, summed across all possible answers.
     """
+    if len(words) <= 2:
+        return next(iter(words))
+
     best_guess, best_total = None, maxsize
     for i, guess in enumerate(WORDS):
-        if i % 1000 == 0 and i > 0:
-            print(f'{i} / {len(WORDS)}')
+        if i == 5000:
+            print(f'Deep search required for: {words}')
         try:
             total = check_for_better_total(words=words, guess=guess, current_best_total=best_total)
         except WorseTotal:
