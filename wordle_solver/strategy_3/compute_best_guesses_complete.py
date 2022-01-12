@@ -76,6 +76,8 @@ def flatten(d, parent_key=''):
     Flatten a nested dictionary into a list of lines, where each line has the form 'key key key ... value'.
     """
     items = []
+    if isinstance(parent_key, tuple):
+        parent_key = ''.join(str(x) for x in parent_key)
     for k, v in d.items():
         new_key = f'{parent_key} {k}' if parent_key else k
         if isinstance(v, MutableMapping):
