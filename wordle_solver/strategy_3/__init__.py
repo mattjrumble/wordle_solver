@@ -124,8 +124,4 @@ def find_best_next_guess(words):
                         best_guess = remaining_word
                         break
                 break
-    print(
-        f'Best next guess is {best_guess} with {best_total / len(words)} average remaining words '
-        f'(down from {len(words)}).'
-    )
     return best_guess
