@@ -20,7 +20,7 @@ class BaseStrategy(ABC):
 
     def get_guess(self):
         if not self.possible_words:
-            raise Exception('No possible words found')
+            raise ImpossibleResult('No possible words found')
         self.last_guess = self._get_guess()
         return self.last_guess
 

@@ -10,10 +10,12 @@ To use a particular strategy, run `python wordle_solver/use_strategy.py <STRATEG
 ```
 python wordle_solver/use_strategy.py 3
 ...
-The best guess is LARES. Enter the result of this guess: 10001
-The best guess is THIOL. Enter the result of this guess: 00001
-The best guess is PLUNK. Enter the result of this guess: 12200
-The answer is SLUMP.
+The best guess is LARES. Enter the result of this guess: 00000
+The best guess is TONIC. Enter the result of this guess: 00200
+The best guess is DYING. Enter the result of this guess: 01020
+Remaining words: ['BUNNY', 'FUNNY', 'NUNNY', 'PUNNY']
+The best guess is UPBYE. Enter the result of this guess: 10110
+The answer is BUNNY.
 ```
 
 To test a particular strategy, run `python wordle_solver/test_strategy.py <STRATEGY_NUMBER>`. Each strategy

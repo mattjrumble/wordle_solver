@@ -21,6 +21,8 @@ def use_strategy(strategy):
             print(f'The answer is {guess}.')
             break
         else:
+            if len(strategy.possible_words) <= 10:
+                print(f'Remaining words: {strategy.possible_words}')
             result = input(f'The best guess is {guess}. Enter the result of this guess: ')
             while not match(r'^[0-2]{5}$', result):
                 result = input(f'Invalid result. Must be in the form XXXXX, where X is 0, 1 or 2. Try again: ')
