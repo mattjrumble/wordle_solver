@@ -1,6 +1,6 @@
 from os.path import join
 
-from wordle_solver import WORDS, filter_words
+from wordle_solver import WORDS, filter_words, ImpossibleResult
 
 MAPPING_FILENAME = join('wordle_solver', 'strategy_3', 'precalculations', 'best_guesses_complete.txt')
 
@@ -43,4 +43,7 @@ class Strategy:
     def receive_result_of_last_guess(self, result):
         self.possible_words = filter_words(words=self.possible_words, guess=self.last_guess, result=result)
         if result != (2, 2, 2, 2, 2):
-            self.mapping = self.mapping[self.last_guess][result]
+            try:
+                self.mapping = self.mapping[self.last_guess][result]
+            except KeyError:
+                raise ImpossibleResult()

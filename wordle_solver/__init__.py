@@ -2,6 +2,10 @@ with open('words.txt') as fd:
     WORDS = [line.strip() for line in fd.readlines()]
 
 
+class ImpossibleResult(Exception):
+    pass
+
+
 def result_of_guess(guess, answer):
     """
     Return a tuple of five integers representing the result of a guess.

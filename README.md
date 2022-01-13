@@ -8,6 +8,15 @@ This is my attempt at coding some different strategies for the game.
 
 To use a particular strategy, run `python wordle_solver/use_strategy.py <STRATEGY_NUMBER>`.
 
+```
+python wordle_solver/use_strategy.py 3
+...
+The best guess is LARES. Enter the result of this guess: 10001
+The best guess is THIOL. Enter the result of this guess: 00001
+The best guess is PLUNK. Enter the result of this guess: 12200
+The answer is SLUMP.
+```
+
 To test a particular strategy, run `python wordle_solver/test_strategy.py <STRATEGY_NUMBER>`. Each strategy
 is tested against every 5-letter word to calculate the expected number of guesses the strategy needs to correctly
 guess a random 5-letter word, along with calculating the worst possible word(s) for the strategy.

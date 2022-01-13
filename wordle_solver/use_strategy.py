@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from re import match
 
+from wordle_solver import ImpossibleResult
 from wordle_solver.strategy_1 import Strategy as Strategy1
 from wordle_solver.strategy_2 import Strategy as Strategy2
 from wordle_solver.strategy_3 import Strategy as Strategy3
@@ -44,7 +45,10 @@ def main():
             "    2 = correct spot\n"
             "------------------------------------"
         )
-        use_strategy(strategy)
+        try:
+            use_strategy(strategy)
+        except ImpossibleResult:
+            print('Impossible result. Check that all the results provided were correct.')
 
 
 if __name__ == '__main__':
