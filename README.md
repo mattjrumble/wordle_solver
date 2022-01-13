@@ -25,7 +25,7 @@ from this list, then updates the list based on the result of the guess. This rep
 This strategy improves on Strategy 1 by picking the "best" word from the list of possible words, rather than the first
 word. The "best" word is based on a heuristic scoring of how common each unique letter in the word is.
 
-### Strategy 3 (WIP)
+### Strategy 3
 
 * Average guesses needed: 4.111
 * Worst word for this strategy: SILLS (8 guesses needed)
