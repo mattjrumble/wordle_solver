@@ -27,8 +27,8 @@ word. The "best" word is based on a heuristic scoring of how common each unique 
 
 ### Strategy 3 (WIP)
 
-* Average guesses needed: ?
-* Worst word for this strategy: ?
+* Average guesses needed: 4.111
+* Worst word for this strategy: SILLS (8 guesses needed)
 
 This strategy involves some pre-calculations to work out the "best" next guess from a given point in the game. The
 "best" guess is defined as the one that results in the lowest number of remaining possible words, when averaged across
