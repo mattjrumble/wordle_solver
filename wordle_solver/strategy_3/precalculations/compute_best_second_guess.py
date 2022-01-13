@@ -1,11 +1,11 @@
 from os.path import join
 
 from wordle_solver import WORDS, result_of_guess
-from wordle_solver.strategy_3 import words_remaining_for_given_result, find_best_next_guess
+from wordle_solver.strategy_3.precalculations import words_remaining_for_given_result, find_best_next_guess
 
 
 BEST_FIRST_GUESS = 'LARES'
-BEST_SECOND_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'best_second_guesses.txt')
+BEST_SECOND_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'precalculations', 'best_second_guesses.txt')
 
 
 def main():

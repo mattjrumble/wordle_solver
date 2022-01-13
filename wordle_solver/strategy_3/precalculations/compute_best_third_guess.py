@@ -1,10 +1,10 @@
 from os.path import join, exists
 
 from wordle_solver import result_of_guess, filter_words, WORDS
-from wordle_solver.strategy_3 import words_remaining_for_given_result, find_best_next_guess
+from wordle_solver.strategy_3.precalculations import words_remaining_for_given_result, find_best_next_guess
 
-BEST_SECOND_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'best_second_guesses.txt')
-BEST_THIRD_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'best_third_guesses.txt')
+BEST_SECOND_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'precalculations', 'best_second_guesses.txt')
+BEST_THIRD_GUESSES_FILENAME = join('wordle_solver', 'strategy_3', 'precalculations', 'best_third_guesses.txt')
 
 
 def load_best_second_guess_mapping():

@@ -1,7 +1,7 @@
 from sys import maxsize
 
 from wordle_solver import WORDS, result_of_guess
-from wordle_solver.strategy_3 import words_remaining_for_given_result
+from wordle_solver.strategy_3.precalculations import words_remaining_for_given_result
 
 
 class WorseTotal(Exception):
