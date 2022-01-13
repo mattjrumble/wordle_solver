@@ -1,9 +1,31 @@
+from abc import ABC, abstractmethod
+
+
 with open('words.txt') as fd:
     WORDS = [line.strip() for line in fd.readlines()]
 
 
 class ImpossibleResult(Exception):
     pass
+
+
+class BaseStrategy(ABC):
+    def __init__(self):
+        self.possible_words = WORDS
+        self.last_guess = None
+
+    @abstractmethod
+    def _get_guess(self):
+        pass
+
+    def get_guess(self):
+        if not self.possible_words:
+            raise Exception('No possible words found')
+        self.last_guess = self._get_guess()
+        return self.last_guess
+
+    def receive_result_of_last_guess(self, result):
+        self.possible_words = filter_words(words=self.possible_words, guess=self.last_guess, result=result)
 
 
 def result_of_guess(guess, answer):

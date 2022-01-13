@@ -1,6 +1,6 @@
 from os.path import join
 
-from wordle_solver import WORDS, filter_words, ImpossibleResult
+from wordle_solver import ImpossibleResult, BaseStrategy
 
 MAPPING_FILENAME = join('wordle_solver', 'strategy_3', 'precalculations', 'best_guesses_complete.txt')
 
@@ -24,24 +24,21 @@ def load_mapping():
 MAPPING = load_mapping()
 
 
-class Strategy:
+class Strategy(BaseStrategy):
     """
     Use the pre-calculated complete mapping for all guesses.
     """
     def __init__(self):
+        super().__init__()
         self.mapping = MAPPING
-        self.last_guess = None
-        self.possible_words = WORDS
 
-    def get_guess(self):
+    def _get_guess(self):
         if isinstance(self.mapping, str):
-            self.last_guess = self.mapping
-        else:
-            self.last_guess = list(self.mapping.keys())[0]
-        return self.last_guess
+            return self.mapping
+        return list(self.mapping.keys())[0]
 
     def receive_result_of_last_guess(self, result):
-        self.possible_words = filter_words(words=self.possible_words, guess=self.last_guess, result=result)
+        super().receive_result_of_last_guess(result)
         if result != (2, 2, 2, 2, 2):
             try:
                 self.mapping = self.mapping[self.last_guess][result]
