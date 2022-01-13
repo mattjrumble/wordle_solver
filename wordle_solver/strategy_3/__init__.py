@@ -1,5 +1,6 @@
 from os.path import join
 
+from wordle_solver import WORDS, filter_words
 
 MAPPING_FILENAME = join('wordle_solver', 'strategy_3', 'precalculations', 'best_guesses_complete.txt')
 
@@ -30,6 +31,7 @@ class Strategy:
     def __init__(self):
         self.mapping = MAPPING
         self.last_guess = None
+        self.possible_words = WORDS
 
     def get_guess(self):
         if isinstance(self.mapping, str):
@@ -39,5 +41,6 @@ class Strategy:
         return self.last_guess
 
     def receive_result_of_last_guess(self, result):
+        self.possible_words = filter_words(words=self.possible_words, guess=self.last_guess, result=result)
         if result != (2, 2, 2, 2, 2):
             self.mapping = self.mapping[self.last_guess][result]

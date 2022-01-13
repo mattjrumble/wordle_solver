@@ -4,10 +4,13 @@
 as the guess-the-color game Mastermind. After guessing a five-letter word, the game tells you whether any of your
 letters are in the secret word and whether they are in the correct place.
 
-This is my attempt at coding some different strategies for the game and seeing how well they perform. Each strategy
+This is my attempt at coding some different strategies for the game.
+
+To use a particular strategy, run `python wordle_solver/use_strategy.py <STRATEGY_NUMBER>`.
+
+To test a particular strategy, run `python wordle_solver/test_strategy.py <STRATEGY_NUMBER>`. Each strategy
 is tested against every 5-letter word to calculate the expected number of guesses the strategy needs to correctly
-guess a random 5-letter word. To test a particular strategy,
-run `python wordle_solver/test_strategy.py <STRATEGY_NUMBER>`.
+guess a random 5-letter word, along with calculating the worst possible word(s) for the strategy.
 
 ### Strategy 1
   
