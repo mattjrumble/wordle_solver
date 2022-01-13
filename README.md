@@ -12,7 +12,7 @@ To test a particular strategy, run `python wordle_solver/test_strategy.py <STRAT
 is tested against every 5-letter word to calculate the expected number of guesses the strategy needs to correctly
 guess a random 5-letter word, along with calculating the worst possible word(s) for the strategy.
 
-### Strategy 1
+### Strategy 1 (The Dumb Strategy)
   
 * Average guesses needed: 5.530
 * Worst word for this strategy: ZILLS (18 guesses needed)
@@ -20,7 +20,7 @@ guess a random 5-letter word, along with calculating the worst possible word(s) 
 This strategy keeps track of every word that hasn't been ruled out yet, in alphabetical order. It picks the first word
 from this list, then updates the list based on the result of the guess. This repeats until the word is found.
 
-### Strategy 2
+### Strategy 2 (The Slightly Less Dumb Strategy)
 
 * Average guesses needed: 4.951
 * Worst words for this strategy: SALES, SANGS, SILLS (15 guesses needed)
@@ -28,7 +28,7 @@ from this list, then updates the list based on the result of the guess. This rep
 This strategy improves on Strategy 1 by picking the "best" word from the list of possible words, rather than the first
 word. The "best" word is based on a heuristic scoring of how common each unique letter in the word is.
 
-### Strategy 3
+### Strategy 3 (The Good Strategy)
 
 * Average guesses needed: 4.111
 * Worst word for this strategy: SILLS (8 guesses needed)
