@@ -2,11 +2,10 @@
   
 [Wordle](https://www.powerlanguage.co.uk/wordle/) is a game where you have to guess a 5-letter word in a similar manner
 as the guess-the-color game Mastermind. After guessing a five-letter word, the game tells you whether any of your
-letters are in the secret word and whether they are in the correct place.
+letters are in the secret word and whether they are in the correct place. This project explores some different
+strategies for the game.
 
-This is my attempt at coding some different strategies for the game.
-
-To use a particular strategy, run `python wordle_solver/use_strategy.py <STRATEGY_NUMBER>`.
+To use a particular strategy, run `python wordle_solver/use_strategy.py <STRATEGY_NUMBER>`:
 
 ```
 python wordle_solver/use_strategy.py 3
@@ -56,4 +55,4 @@ to `best_third_guesses.txt`.
 all the previous mapping files into one complete mapping of `{best guess -> result -> best guess -> etc}` in
 `best_guesses_complete.txt`. 
 
-The strategy then just uses the complete mapping to pick its next guess.
+The strategy then just uses the complete mapping stored in `best_guesses_complete.txt` to pick its next guess.
