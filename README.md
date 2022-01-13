@@ -34,17 +34,14 @@ This strategy involves some pre-calculations to work out the "best" next guess f
 "best" guess is defined as the one that results in the lowest number of remaining possible words, when averaged across
 all possible answers.
 
-1. `wordle_solver/strategy_3/compute_best_first_guess.py` does this for the first guess. This calculates that the best
-first guess is `LARES`.
-2. `wordle_solver/strategy_3/compute_best_second_guess.py` does this for the second guess (assuming `LARES` as the
-first guess). It outputs the mapping of `{best first guess -> result from first guess -> best second guess}` into
-`wordle_solver/strategy_3/best_second_guesses.txt`.
-3. `wordle_solver/strategy_3/compute_best_third_guess.py` does this again for the third guess (using the mapping of best
-second guesses), outputting the mapping of
-`{best first guess -> result from first guess -> best second guess -> result from second guess -> best third guess}`
-into `wordle_solver/strategy_3/best_third_guesses.txt`.
-4. `wordle_solver/strategy_3/compute_best_guesses_complete.py` does this for all remaining guesses (using the previous
-mappings), and combines all the previous mapping files into one complete mapping of
-`{best guess -> result -> best guess -> etc}` in `wordle_solver/strategy_3/best_guesses_complete.txt`. 
+1. `compute_best_first_guess.py` does this for the first guess. This calculates that the best first guess is `LARES`.
+2. `compute_best_second_guess.py` does this for the second guess (assuming `LARES` as the first guess). It outputs
+the mapping of `{best first guess -> result from first guess -> best second guess}` into `best_second_guesses.txt`.
+3. `compute_best_third_guess.py` does this again for the third guess (using the mapping of best second guesses),
+outputting the mapping of `{best first guess -> result from first guess -> best second guess -> result from second guess -> best third guess}`
+to `best_third_guesses.txt`.
+4. `compute_best_guesses_complete.py` does this for all remaining guesses (using the previous mappings), and combines
+all the previous mapping files into one complete mapping of `{best guess -> result -> best guess -> etc}` in
+`best_guesses_complete.txt`. 
 
 The strategy then just uses the complete mapping to pick its next guess.
