@@ -43,8 +43,7 @@ def generate_mapping(previous_guesses_and_results, words_remaining, depth):
     depth += 1
 
     if len(words_remaining) == 1:
-        answer = next(iter(words_remaining))
-        return {answer: {(2, 2, 2, 2, 2): answer}}
+        return next(iter(words_remaining))
 
     if depth == 1:
         guess = BEST_FIRST_GUESS
@@ -61,9 +60,7 @@ def generate_mapping(previous_guesses_and_results, words_remaining, depth):
         print(f'Solving for {previous_guesses_and_results + [guess]}...')
 
     for result in results:
-        if result == (2, 2, 2, 2, 2):
-            mapping[guess][result] = guess
-        else:
+        if result != (2, 2, 2, 2, 2):
             new_words_remaining = words_remaining_for_given_result(words=words_remaining, guess=guess, result=result)
             new_previous_guesses_and_results = copy(previous_guesses_and_results)
             new_previous_guesses_and_results.extend((guess, result))
@@ -76,9 +73,9 @@ def flatten(d, parent_key=''):
     Flatten a nested dictionary into a list of lines, where each line has the form 'key key key ... value'.
     """
     items = []
-    if isinstance(parent_key, tuple):
-        parent_key = ''.join(str(x) for x in parent_key)
     for k, v in d.items():
+        if isinstance(k, tuple):
+            k = ''.join(str(x) for x in k)
         new_key = f'{parent_key} {k}' if parent_key else k
         if isinstance(v, MutableMapping):
             items.extend(flatten(v, new_key))
